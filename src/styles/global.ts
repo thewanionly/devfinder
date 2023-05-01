@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
+    background-color: ${({ theme: { colors } }) => colors.appBgLight};;
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 

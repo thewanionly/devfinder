@@ -4,8 +4,8 @@ import 'styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      bodyText: string
-      bodyText2: string
+      appBgLight: string
+      appBgDark: string
     }
     fonts: {
       primary: string

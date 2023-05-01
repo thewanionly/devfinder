@@ -1,11 +1,10 @@
-import { rgba } from 'polished'
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
 
 // Declare properties that are meaningful to your app
 export const theme = {
   colors: {
-    bodyText: COLORS.white,
-    bodyText2: rgba(COLORS.white, 0.8),
+    appBgLight: COLORS.zircon,
+    appBgDark: COLORS.mirage,
   },
   fonts: {
     primary: TYPOGRAPHY.space_mono,
