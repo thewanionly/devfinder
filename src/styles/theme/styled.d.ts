@@ -11,9 +11,16 @@ declare module 'styled-components' {
       primary: string
     }
     fontSizes: {
+      xs: string
+      sm1: string
+      sm2: string
       reg: string
+      med: string
+      lg: string
+      xl: string
     }
     fontWeights: {
+      regular: number
       bold: number
     }
     breakPoints: {

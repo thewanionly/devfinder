@@ -11,9 +11,16 @@ export const theme = {
     primary: TYPOGRAPHY.space_mono,
   },
   fontSizes: {
+    xs: TYPOGRAPHY.fontSizeXs,
+    sm1: TYPOGRAPHY.fontSizeSm1,
+    sm2: TYPOGRAPHY.fontSizeSm2,
     reg: TYPOGRAPHY.fontSizeReg,
+    med: TYPOGRAPHY.fontSizeMed,
+    lg: TYPOGRAPHY.fontSizeLg,
+    xl: TYPOGRAPHY.fontSizeXl,
   },
   fontWeights: {
+    regular: TYPOGRAPHY.fontWeightRegular,
     bold: TYPOGRAPHY.fontWeightBold,
   },
   breakPoints: {
