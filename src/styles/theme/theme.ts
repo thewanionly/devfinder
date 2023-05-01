@@ -8,7 +8,7 @@ export const theme = {
     bodyText2: rgba(COLORS.white, 0.8),
   },
   fonts: {
-    primary: TYPOGRAPHY.sans_serif,
+    primary: TYPOGRAPHY.space_mono,
   },
   fontSizes: {
     reg: TYPOGRAPHY.fontSizeReg,
