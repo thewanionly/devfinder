@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
+import { GlobalStyles, Theme } from 'styles'
 
 type RootWrapperProps = {
   children?: React.ReactNode
@@ -7,7 +8,12 @@ type RootWrapperProps = {
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RootWrapper = ({ children }: RootWrapperProps) => {
-  return <>{children}</>
+  return (
+    <Theme>
+      <GlobalStyles />
+      {children}
+    </Theme>
+  )
 }
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>): RenderResult =>
