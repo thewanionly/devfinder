@@ -1,7 +1,12 @@
-import { render } from 'test'
+import { render, screen } from 'test'
+
 import { App } from './App'
 
-test('Renders main page correctly', () => {
-  render(<App />)
-  expect(true).toBeTruthy()
+describe('App', () => {
+  it('displays header ', () => {
+    render(<App />)
+
+    const header = screen.getByRole('banner')
+    expect(header).toBeInTheDocument()
+  })
 })

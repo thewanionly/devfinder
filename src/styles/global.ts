@@ -22,6 +22,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    line-height: 3.9rem;
     color: ${({ theme: { colors } }) => colors.appHeaderText};
   }
 
