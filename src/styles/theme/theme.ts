@@ -1,10 +1,17 @@
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
+import { AppTheme } from 'types'
 
 // Declare properties that are meaningful to your app
 export const theme = {
   colors: {
-    appBgLight: COLORS.zircon,
-    appBgDark: COLORS.mirage,
+    [AppTheme.Light]: {
+      appBg: COLORS.zircon,
+      appHeaderText: COLORS.dark,
+    },
+    [AppTheme.Dark]: {
+      appBg: COLORS.mirage,
+      appHeaderText: COLORS.white,
+    },
   },
   fonts: {
     primary: TYPOGRAPHY.space_mono,

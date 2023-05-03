@@ -1,11 +1,11 @@
 import 'styled-components'
 
-// This type declaration should match theme.ts
+// This type declaration should match the `theme` prop of the ThemeProvider, not the one declared in `theme.ts`
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      appBgLight: string
-      appBgDark: string
+      appBg: string
+      appHeaderText: string
     }
     fonts: {
       primary: string
