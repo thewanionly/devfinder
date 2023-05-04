@@ -1,6 +1,8 @@
 import { ReactElement } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
+
 import { GlobalStyles, Theme } from 'styles'
+import { AppThemeProvider } from 'context'
 
 type RootWrapperProps = {
   children?: React.ReactNode
@@ -9,10 +11,12 @@ type RootWrapperProps = {
 // eslint-disable-next-line react-refresh/only-export-components
 const RootWrapper = ({ children }: RootWrapperProps) => {
   return (
-    <Theme>
-      <GlobalStyles />
-      {children}
-    </Theme>
+    <AppThemeProvider>
+      <Theme>
+        <GlobalStyles />
+        {children}
+      </Theme>
+    </AppThemeProvider>
   )
 }
 
