@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Icon } from 'components'
 import { useAppThemeContext, APP_THEME_MAP } from 'context'
+import { HEADER_TITLE } from './Header.constants'
 
 const S = {
   Header: styled.header`
@@ -64,7 +65,7 @@ export const Header = () => {
 
   return (
     <S.Header>
-      <S.HeaderTitle>devfinder</S.HeaderTitle>
+      <S.HeaderTitle>{HEADER_TITLE}</S.HeaderTitle>
       <S.DarkModeToggle onClick={toggleAppTheme}>
         <S.DarkModeToggleText>{label}</S.DarkModeToggleText>
         <S.DarkModeToggleIcon name={icon} />

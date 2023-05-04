@@ -5,6 +5,8 @@ import { Header } from './Header'
 import { APP_THEME_MAP, DARK_MODE_STORAGE_KEY } from 'context'
 import { AppTheme } from 'types'
 
+import { HEADER_TITLE } from './Header.constants'
+
 beforeEach(() => {
   localStorage.clear()
 })
@@ -16,7 +18,7 @@ describe('Header', () => {
     const title = screen.getByRole('heading', { level: 1 })
 
     expect(title).toBeInTheDocument()
-    expect(title).toHaveTextContent(/devfinder/i)
+    expect(title).toHaveTextContent(new RegExp(HEADER_TITLE))
   })
 
   it('displays dark mode toggle text', () => {
