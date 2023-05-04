@@ -7,10 +7,12 @@ export const theme = {
     [AppTheme.Light]: {
       appBg: COLORS.zircon,
       appHeaderText: COLORS.dark,
+      appThemeToggle: COLORS.kashmirBlue,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
       appHeaderText: COLORS.white,
+      appThemeToggle: COLORS.white,
     },
   },
   fonts: {
