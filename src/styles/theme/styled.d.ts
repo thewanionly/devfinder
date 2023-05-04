@@ -6,6 +6,8 @@ declare module 'styled-components' {
     colors: {
       appBg: string
       appHeaderText: string
+      appThemeToggle: string
+      appThemeToggleHover: string
     }
     fonts: {
       primary: string

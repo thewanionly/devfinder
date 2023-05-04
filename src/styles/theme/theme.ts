@@ -8,11 +8,13 @@ export const theme = {
       appBg: COLORS.zircon,
       appHeaderText: COLORS.dark,
       appThemeToggle: COLORS.kashmirBlue,
+      appThemeToggleHover: COLORS.dark,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
       appHeaderText: COLORS.white,
       appThemeToggle: COLORS.white,
+      appThemeToggleHover: COLORS.blueBell,
     },
   },
   fonts: {
