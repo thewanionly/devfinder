@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
-import { Icon, IconName } from 'components'
+
+import { Icon } from 'components'
+import { useAppThemeContext, APP_THEME_MAP } from 'context'
 
 const S = {
   Header: styled.header`
@@ -43,12 +46,28 @@ const S = {
 }
 
 export const Header = () => {
+  const { appTheme, toggleAppTheme } = useAppThemeContext()
+
+  const { label, icon } = APP_THEME_MAP[appTheme]
+
+  useEffect(() => {
+    function preventSelection(event: MouseEvent) {
+      if (event.detail > 1) {
+        event.preventDefault()
+      }
+    }
+
+    document.addEventListener('mousedown', preventSelection, false)
+
+    return () => document.removeEventListener('mousedown', preventSelection, false)
+  }, [])
+
   return (
     <S.Header>
       <S.HeaderTitle>devfinder</S.HeaderTitle>
-      <S.DarkModeToggle>
-        <S.DarkModeToggleText>Dark</S.DarkModeToggleText>
-        <S.DarkModeToggleIcon name={IconName.Moon} />
+      <S.DarkModeToggle onClick={toggleAppTheme}>
+        <S.DarkModeToggleText>{label}</S.DarkModeToggleText>
+        <S.DarkModeToggleIcon name={icon} />
       </S.DarkModeToggle>
     </S.Header>
   )
