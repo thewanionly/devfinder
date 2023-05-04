@@ -1,7 +1,15 @@
 import { render, screen } from 'test'
 
 import { Header } from './Header'
-import { IconName } from 'components'
+import {
+  APP_THEME_MAP,
+  DARK_MODE_STORAGE_KEY,
+} from 'context/AppThemeContext/AppThemeContext.constants'
+import { AppTheme } from 'types'
+
+beforeEach(() => {
+  localStorage.clear()
+})
 
 describe('Header', () => {
   it('displays header title', () => {
@@ -14,22 +22,30 @@ describe('Header', () => {
   })
 
   it('displays dark mode toggle text', () => {
+    // Set default appTheme to light
+    const mockedAppTheme = AppTheme.Light
+    localStorage.setItem(DARK_MODE_STORAGE_KEY, JSON.stringify(mockedAppTheme !== AppTheme.Light))
+
     render(<Header />)
 
-    // TODO: value here should be the default value of the toggle
-    const toggleText = screen.getByText(/dark/i)
+    const { label } = APP_THEME_MAP[mockedAppTheme]
+
+    const toggleText = screen.getByText(new RegExp(label))
 
     expect(toggleText).toBeInTheDocument()
   })
 
   it('displays dark mode toggle icon', () => {
+    // Set default appTheme to light
+    const mockedAppTheme = AppTheme.Light
+    localStorage.setItem(DARK_MODE_STORAGE_KEY, JSON.stringify(mockedAppTheme !== AppTheme.Light))
+
     render(<Header />)
 
-    // TODO: value here should be the default icon of the toggle
-    const iconName = IconName.Moon
+    const { icon } = APP_THEME_MAP[mockedAppTheme]
 
-    const icon = screen.getByLabelText(`${iconName} icon`)
+    const iconEl = screen.getByLabelText(`${icon} icon`)
 
-    expect(icon).toBeInTheDocument()
+    expect(iconEl).toBeInTheDocument()
   })
 })

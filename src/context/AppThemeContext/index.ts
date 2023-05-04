@@ -1,2 +1,2 @@
 export * from './AppThemeContext'
-export * from './useAppThemeContext'
+export * from './AppThemeContext.hooks'

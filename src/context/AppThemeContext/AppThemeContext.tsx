@@ -1,15 +1,18 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 
+import { useDarkMode } from 'hooks'
 import { AppTheme } from 'types'
+
+import { DARK_MODE_STORAGE_KEY } from './AppThemeContext.constants'
 
 interface AppThemeContextValue {
   appTheme: AppTheme
-  setAppTheme: (newTheme: AppTheme) => void
+  toggleAppTheme: () => void
 }
 
 const initialAppThemeContextValue: AppThemeContextValue = {
   appTheme: AppTheme.Light,
-  setAppTheme: () => null,
+  toggleAppTheme: () => null,
 }
 
 export const AppThemeContext = createContext<AppThemeContextValue>(initialAppThemeContextValue)
@@ -19,13 +22,15 @@ type AppThemeProviderProps = {
 }
 
 export const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
-  const [appTheme, setAppTheme] = useState<AppTheme>(AppTheme.Light)
+  const [isDarkMode, toggleDarkMode] = useDarkMode(DARK_MODE_STORAGE_KEY)
+
+  const appTheme = isDarkMode ? AppTheme.Dark : AppTheme.Light
 
   return (
     <AppThemeContext.Provider
       value={{
         appTheme,
-        setAppTheme,
+        toggleAppTheme: toggleDarkMode,
       }}
     >
       {children}
