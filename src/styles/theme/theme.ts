@@ -9,12 +9,18 @@ export const theme = {
       appHeaderText: COLORS.dark,
       appThemeToggle: COLORS.kashmirBlue,
       appThemeToggleHover: COLORS.dark,
+      buttonBg: COLORS.deepSkyBlue,
+      buttonBgHover: COLORS.crystalBlue,
+      buttonText: COLORS.white,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
       appHeaderText: COLORS.white,
       appThemeToggle: COLORS.white,
       appThemeToggleHover: COLORS.blueBell,
+      buttonBg: COLORS.deepSkyBlue,
+      buttonBgHover: COLORS.crystalBlue,
+      buttonText: COLORS.white,
     },
   },
   fonts: {
