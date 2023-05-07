@@ -8,7 +8,7 @@ const S = {
     border-radius: 1rem;
     padding: 1.25rem 1.6rem;
     line-height: 2.1rem;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
     background-color: ${({ theme: { colors } }) => colors.buttonBg};
     color: ${({ theme: { colors } }) => colors.buttonText};
@@ -26,6 +26,7 @@ const S = {
 
 interface CommonProps {
   className?: string
+  type?: 'submit' | 'button'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -42,11 +43,11 @@ type ConditionalProps =
 type ButtonProps = CommonProps & ConditionalProps
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className = '', label, children, onClick },
+  { className = '', type, label, children, onClick },
   ref
 ) {
   return (
-    <S.Button className={className} ref={ref} type="button" onClick={onClick}>
+    <S.Button className={className} ref={ref} type={type || 'button'} onClick={onClick}>
       {label || children}
     </S.Button>
   )

@@ -10,7 +10,6 @@ const S = {
     margin: 3.1rem auto 3.6rem;
     max-width: 73rem;
     min-width: 32.7rem;
-    padding: 0 2.4rem;
 
     display: flex;
     align-items: center;

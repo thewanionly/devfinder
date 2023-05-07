@@ -8,9 +8,12 @@ declare module 'styled-components' {
       appHeaderText: string
       appThemeToggle: string
       appThemeToggleHover: string
+      bodyText: string
       buttonBg: string
       buttonBgHover: string
       buttonText: string
+      searchBarBg: string
+      searchIcon: string
     }
     fonts: {
       primary: string
