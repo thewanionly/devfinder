@@ -1,3 +1,4 @@
+import { rgba } from 'polished'
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
 import { AppTheme } from 'types'
 
@@ -14,8 +15,11 @@ export const theme = {
       buttonBgHover: COLORS.crystalBlue,
       buttonText: COLORS.white,
       searchBarBg: COLORS.white,
+      searchBarBoxShadow: rgba(COLORS.iris, 0.198567),
       searchIcon: COLORS.deepSkyBlue,
       searchError: COLORS.coralRed,
+      userDetailsCardBg: COLORS.white,
+      userDetailsCardBoxShadow: rgba(COLORS.iris, 0.198567),
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
@@ -27,8 +31,11 @@ export const theme = {
       buttonBgHover: COLORS.crystalBlue,
       buttonText: COLORS.white,
       searchBarBg: COLORS.blueZodiac,
+      searchBarBoxShadow: 'none',
       searchIcon: COLORS.deepSkyBlue,
       searchError: COLORS.coralRed,
+      userDetailsCardBg: COLORS.blueZodiac,
+      userDetailsCardBoxShadow: 'none',
     },
   },
   fonts: {

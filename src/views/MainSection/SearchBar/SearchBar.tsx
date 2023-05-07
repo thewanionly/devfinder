@@ -11,6 +11,7 @@ const S = {
     align-items: center;
     justify-content: space-between;
     background-color: ${({ theme: { colors } }) => colors.searchBarBg};
+    box-shadow: 0px 16px 30px -10px ${({ theme: { colors } }) => colors.searchBarBoxShadow};
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       padding: 0.95rem 1rem;

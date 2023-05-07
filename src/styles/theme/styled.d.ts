@@ -13,8 +13,11 @@ declare module 'styled-components' {
       buttonBgHover: string
       buttonText: string
       searchBarBg: string
+      searchBarBoxShadow: string
       searchIcon: string
       searchError: string
+      userDetailsCardBg: string
+      userDetailsCardBoxShadow: string
     }
     fonts: {
       primary: string

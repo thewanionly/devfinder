@@ -8,6 +8,7 @@ export const COLORS = {
   dark: 'hsla(220, 18%, 16%, 1)', // #222731
   mirage: 'hsl(220, 40%, 13%)', // #141D2F
   blueZodiac: 'hsl(222, 41%, 20%)', // #1E2A47
+  iris: 'hsl(227, 46%, 50%)', //#4660bb
   coralRed: 'hsl(0, 92%, 62%)', // #F74646
   zircon: 'hsl(227, 100%, 98%)', // #F6F8FF
   white: 'hsl(0, 0%, 100%)', //  #FFFFFF or #FEFEFE
