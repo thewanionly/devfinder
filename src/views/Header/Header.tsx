@@ -29,6 +29,7 @@ const S = {
     }
   `,
   DarkModeToggleText: styled.span`
+    user-select: none;
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
     line-height: 1.9rem;
@@ -49,18 +50,6 @@ export const Header = () => {
   const { appTheme, toggleAppTheme } = useAppThemeContext()
 
   const { label, icon } = APP_THEME_MAP[appTheme]
-
-  useEffect(() => {
-    function preventSelection(event: MouseEvent) {
-      if (event.detail > 1) {
-        event.preventDefault()
-      }
-    }
-
-    document.addEventListener('mousedown', preventSelection, false)
-
-    return () => document.removeEventListener('mousedown', preventSelection, false)
-  }, [])
 
   return (
     <S.Header>
