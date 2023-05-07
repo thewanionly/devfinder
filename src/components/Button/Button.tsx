@@ -19,6 +19,8 @@ const S = {
     }
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
+      line-height: 2.4rem;
       padding: 1.25rem 2.4rem;
     }
   `,

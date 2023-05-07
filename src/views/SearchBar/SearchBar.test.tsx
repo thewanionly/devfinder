@@ -33,6 +33,14 @@ describe('SearchBar', () => {
     expect(searchButton).toBeInTheDocument()
   })
 
+  it('displays error text', () => {
+    const errorText = 'No results'
+    render(<SearchBar errorMessage={errorText} />)
+
+    const errorTextEl = screen.getByText(errorText)
+    expect(errorTextEl).toBeInTheDocument()
+  })
+
   it('calls the function passed in the `onSearch` prop when search button is clicked', async () => {
     const onSearchHandler = jest.fn()
     render(<SearchBar onSearch={onSearchHandler} />)

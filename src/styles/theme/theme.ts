@@ -15,6 +15,7 @@ export const theme = {
       buttonText: COLORS.white,
       searchBarBg: COLORS.white,
       searchIcon: COLORS.deepSkyBlue,
+      searchError: COLORS.coralRed,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
@@ -27,6 +28,7 @@ export const theme = {
       buttonText: COLORS.white,
       searchBarBg: COLORS.blueZodiac,
       searchIcon: COLORS.deepSkyBlue,
+      searchError: COLORS.coralRed,
     },
   },
   fonts: {

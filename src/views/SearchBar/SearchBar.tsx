@@ -49,13 +49,33 @@ const S = {
       margin-left: 2.4rem;
     }
   `,
-  SearchButton: styled(Button)``,
+  SearchErrorMessage: styled.span`
+    margin-left: 0.8rem;
+    flex-shrink: 0;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    line-height: 2.2rem;
+    color: ${({ theme: { colors } }) => colors.searchError};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+      margin-left: 2rem;
+    }
+  `,
+  SearchButton: styled(Button)`
+    margin-left: 0.8rem;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      margin-left: 2.4rem;
+    }
+  `,
 }
 
 type SearchBarProps = {
   className?: string
   defaultValue?: string
   placeholder?: string
+  errorMessage?: string
   onSearch?: (value: string) => void
 }
 
@@ -63,6 +83,7 @@ export const SearchBar = ({
   className = '',
   defaultValue = '',
   placeholder = '',
+  errorMessage = '',
   onSearch,
 }: SearchBarProps) => {
   const [searchTerm, setSearchTerm] = useState(defaultValue)
@@ -83,6 +104,7 @@ export const SearchBar = ({
     <S.SearchBar className={className} onSubmit={handleSearch}>
       <S.SearchIcon name={IconName.Search} />
       <S.SearchInput placeholder={placeholder} value={searchTerm} onChange={handleSetSearchTerm} />
+      {errorMessage && <S.SearchErrorMessage>{errorMessage}</S.SearchErrorMessage>}
       <S.SearchButton type="submit">Search</S.SearchButton>
     </S.SearchBar>
   )

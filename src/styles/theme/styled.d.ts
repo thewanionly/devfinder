@@ -14,6 +14,7 @@ declare module 'styled-components' {
       buttonText: string
       searchBarBg: string
       searchIcon: string
+      searchError: string
     }
     fonts: {
       primary: string
