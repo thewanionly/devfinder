@@ -14,12 +14,20 @@ const S = {
     align-items: center;
     justify-content: space-between;
     background-color: ${({ theme: { colors } }) => colors.searchBarBg};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      padding: 0.95rem 1rem;
+    }
   `,
   SearchIcon: styled(Icon)`
     flex-shrink: 0;
     margin-left: 0.9rem;
     transform: scale(0.84);
     color: ${({ theme: { colors } }) => colors.searchIcon};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      margin-left: 2.2rem;
+    }
   `,
   SearchInput: styled.input`
     margin-left: 0.9rem;
@@ -34,6 +42,11 @@ const S = {
 
     &::placeholder {
       color: ${({ theme: { colors } }) => colors.bodyText};
+    }
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.med};
+      margin-left: 2.4rem;
     }
   `,
   SearchButton: styled(Button)``,
