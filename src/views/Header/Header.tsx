@@ -6,7 +6,7 @@ import { HEADER_TITLE } from './Header.constants'
 
 const S = {
   Header: styled.header`
-    margin: 3.1rem auto 3.6rem;
+    margin: 3.1rem auto 0;
     max-width: 73rem;
     min-width: 32.7rem;
 

@@ -7,7 +7,7 @@ const S = {
   SearchBar: styled.form`
     max-width: 73rem;
     min-width: 32.7rem;
-    margin: 0 auto;
+    margin: 3.6rem auto 0;
     padding: 0.7rem;
     border-radius: 1.5rem;
     display: flex;
