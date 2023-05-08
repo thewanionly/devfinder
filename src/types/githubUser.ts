@@ -35,19 +35,17 @@ export interface GithubUserApiResponse {
 }
 
 // transformed user data to be used by UI
-export class GithubUser {
-  constructor(
-    public avatar_url: string = '',
-    public name: string = '',
-    public login: string = '',
-    public created_at: string = '',
-    public bio: string = '',
-    public public_repos: number = 0,
-    public followers: number = 0,
-    public following: number = 0,
-    public location: string = '',
-    public blog: string = '',
-    public twitter_username: string = '',
-    public company: string = ''
-  ) {}
+export interface GithubUser {
+  avatar_url: string
+  name: string
+  login: string
+  created_at: string
+  bio: string
+  public_repos: number
+  followers: number
+  following: number
+  location: string
+  blog: string
+  twitter_username: string
+  company: string
 }

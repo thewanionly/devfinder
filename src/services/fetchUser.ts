@@ -16,21 +16,20 @@ const transformResponse = ({
   blog,
   twitter_username,
   company,
-}: GithubUserApiResponse): GithubUser =>
-  new GithubUser(
-    avatar_url,
-    name,
-    login,
-    created_at,
-    bio,
-    public_repos,
-    followers,
-    following,
-    location,
-    blog,
-    twitter_username,
-    company
-  )
+}: GithubUserApiResponse): GithubUser => ({
+  avatar_url,
+  name: name || '',
+  login,
+  created_at: created_at || '',
+  bio: bio || '',
+  public_repos,
+  followers: followers || 0,
+  following: following || 0,
+  location: location || '',
+  blog: blog || '',
+  twitter_username: twitter_username || '',
+  company: company || '',
+})
 
 export const fetchUser = async (username: string): Promise<GithubUser> => {
   try {

@@ -14,7 +14,12 @@ const S = {
     align-items: center;
     justify-content: space-between;
   `,
-  HeaderTitle: styled.h1``,
+  HeaderTitle: styled.h1`
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    line-height: 3.9rem;
+    color: ${({ theme: { colors } }) => colors.appHeaderText};
+  `,
   DarkModeToggle: styled.div`
     cursor: pointer;
     display: flex;

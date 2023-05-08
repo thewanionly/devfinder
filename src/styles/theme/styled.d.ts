@@ -18,6 +18,9 @@ declare module 'styled-components' {
       searchError: string
       userDetailsCardBg: string
       userDetailsCardBoxShadow: string
+      userDetailsHeaderText: string
+      userDetailsUsername: string
+      userDetailsJoinedDate: string
     }
     fonts: {
       primary: string

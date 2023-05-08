@@ -20,6 +20,9 @@ export const theme = {
       searchError: COLORS.coralRed,
       userDetailsCardBg: COLORS.white,
       userDetailsCardBoxShadow: rgba(COLORS.iris, 0.198567),
+      userDetailsHeaderText: COLORS.gunmetal,
+      userDetailsUsername: COLORS.deepSkyBlue,
+      userDetailsJoinedDate: COLORS.greyishBlue,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
@@ -36,6 +39,9 @@ export const theme = {
       searchError: COLORS.coralRed,
       userDetailsCardBg: COLORS.blueZodiac,
       userDetailsCardBoxShadow: 'none',
+      userDetailsHeaderText: COLORS.white,
+      userDetailsUsername: COLORS.deepSkyBlue,
+      userDetailsJoinedDate: COLORS.white,
     },
   },
   fonts: {
