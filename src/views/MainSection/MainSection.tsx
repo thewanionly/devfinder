@@ -35,7 +35,7 @@ export const MainSection = () => {
   return (
     <S.MainSection>
       <SearchBar placeholder="Search GitHub username…" />
-      {status === 'success' && data && <UserDetailsCard data={data} />}
+      {status === 'success' && <UserDetailsCard data={data} />}
     </S.MainSection>
   )
 }

@@ -6,6 +6,15 @@ import { formatDate } from './UserDetailsCard.utils'
 import { mockedUserDetails } from 'test/__mocks__/data/userDetails'
 
 describe('UserDetailsCard', () => {
+  it(`displays user's avatar`, () => {
+    render(<UserDetailsCard data={mockedUserDetails} />)
+
+    const avatar = screen.getByAltText(mockedUserDetails.name)
+
+    expect(avatar).toBeInTheDocument()
+    expect(avatar).toHaveAttribute('src', mockedUserDetails.avatar_url)
+  })
+
   it(`displays user's name`, () => {
     render(<UserDetailsCard data={mockedUserDetails} />)
 

@@ -6,10 +6,12 @@ const S = {
   UserDetailsCard: styled.article`
     display: grid;
     grid-template-areas:
-      'avatar' 'main'
-      'bio' 'bio'
-      'numbers' 'numbers'
-      'social' 'social';
+      'avatar main'
+      'bio bio'
+      'numbers numbers'
+      'social social';
+    grid-template-columns: max-content 1fr;
+    column-gap: 1.95rem;
     padding: 3.2rem 2.4rem;
     background-color: ${({ theme: { colors } }) => colors.userDetailsCardBg};
     box-shadow: 0px 16px 30px -10px ${({ theme: { colors } }) => colors.userDetailsCardBoxShadow};
@@ -17,10 +19,38 @@ const S = {
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       padding: 4rem;
+      column-gap: 4.1rem;
     }
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
+      grid-template-areas:
+        'avatar main'
+        'avatar bio'
+        'avatar numbers'
+        'avatar social';
+      column-gap: 3.7 rem;
+    }
+  `,
+  UserDetailsAvatarContainer: styled.div`
+    grid-area: avatar;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      width: 11.7rem;
+      height: 11.7rem;
+    }
+  `,
+  UserDetailsAvatar: styled.img`
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
   `,
   UserDetailsMainDetails: styled.div`
     grid-area: main;
+    align-self: center;
     display: flex;
     flex-direction: column;
 
@@ -77,10 +107,13 @@ interface UserDetailsCardProps {
 }
 
 export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
-  const { name, login, created_at } = data
+  const { avatar_url, name, login, created_at } = data
 
   return (
     <S.UserDetailsCard>
+      <S.UserDetailsAvatarContainer>
+        <S.UserDetailsAvatar src={avatar_url} alt={name} />
+      </S.UserDetailsAvatarContainer>
       <S.UserDetailsMainDetails>
         <S.UserDetailsNameContainer>
           <S.UserDetailsName>{name}</S.UserDetailsName>
