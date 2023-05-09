@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { GithubUser } from 'types/githubUser'
 import { formatDate } from './UserDetailsCard.utils'
+import { EMPTY_BIO_TEXT } from './UserDetailsCard.constants'
 
 const S = {
   UserDetailsCard: styled.article`
@@ -100,6 +101,28 @@ const S = {
       margin-top: 0.8rem;
     }
   `,
+  UserDetailsBio: styled.p<UserDetailsBioStyleProps>`
+    grid-area: bio;
+    margin-top: 3.3rem;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
+    line-height: 2.5rem;
+    color: ${({ theme: { colors } }) => colors.bodyText};
+    opacity: ${({ isEmpty }) => (isEmpty ? 0.75 : 1)};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      margin-top: 2.4rem;
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+    }
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
+      margin-top: 2rem;
+    }
+  `,
+}
+
+interface UserDetailsBioStyleProps {
+  isEmpty: boolean
 }
 
 interface UserDetailsCardProps {
@@ -107,7 +130,7 @@ interface UserDetailsCardProps {
 }
 
 export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
-  const { avatar_url, name, login, created_at } = data
+  const { avatar_url, name, login, created_at, bio } = data
 
   return (
     <S.UserDetailsCard>
@@ -117,10 +140,13 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
       <S.UserDetailsMainDetails>
         <S.UserDetailsNameContainer>
           <S.UserDetailsName>{name}</S.UserDetailsName>
-          <S.UserDetailsUserName>{`@${login}`}</S.UserDetailsUserName>
+          {login && <S.UserDetailsUserName>{`@${login}`}</S.UserDetailsUserName>}
         </S.UserDetailsNameContainer>
-        <S.UserDetailsJoinedDate>{`Joined ${formatDate(created_at)}`}</S.UserDetailsJoinedDate>
+        {created_at && (
+          <S.UserDetailsJoinedDate>{`Joined ${formatDate(created_at)}`}</S.UserDetailsJoinedDate>
+        )}
       </S.UserDetailsMainDetails>
+      <S.UserDetailsBio isEmpty={!bio}>{bio || EMPTY_BIO_TEXT}</S.UserDetailsBio>
     </S.UserDetailsCard>
   )
 }

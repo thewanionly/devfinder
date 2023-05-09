@@ -1,9 +1,9 @@
 import { render, screen } from 'test'
+import { mockedEmptyUserDetails, mockedUserDetails } from 'test/__mocks__/data/userDetails'
 
 import { UserDetailsCard } from './UserDetailsCard'
-
 import { formatDate } from './UserDetailsCard.utils'
-import { mockedUserDetails } from 'test/__mocks__/data/userDetails'
+import { EMPTY_BIO_TEXT } from './UserDetailsCard.constants'
 
 describe('UserDetailsCard', () => {
   it(`displays user's avatar`, () => {
@@ -34,5 +34,19 @@ describe('UserDetailsCard', () => {
 
     const joinedDate = screen.getByText(new RegExp(formatDate(mockedUserDetails.created_at)))
     expect(joinedDate).toBeInTheDocument()
+  })
+
+  it(`displays user's bio if present`, () => {
+    render(<UserDetailsCard data={mockedUserDetails} />)
+
+    const bio = screen.getByText(mockedUserDetails.bio)
+    expect(bio).toBeInTheDocument()
+  })
+
+  it(`displays ${EMPTY_BIO_TEXT} if the user has no bio`, () => {
+    render(<UserDetailsCard data={mockedEmptyUserDetails} />)
+
+    const emptyBio = screen.getByText(EMPTY_BIO_TEXT)
+    expect(emptyBio).toBeInTheDocument()
   })
 })

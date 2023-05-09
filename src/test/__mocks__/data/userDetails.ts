@@ -14,3 +14,18 @@ export const mockedUserDetails: GithubUser = {
   twitter_username: 'test',
   company: '@github',
 }
+
+export const mockedEmptyUserDetails: GithubUser = {
+  avatar_url: '',
+  name: '',
+  login: '',
+  created_at: '',
+  bio: '',
+  public_repos: 0,
+  followers: 0,
+  following: 0,
+  location: '',
+  blog: '',
+  twitter_username: '',
+  company: '',
+}
