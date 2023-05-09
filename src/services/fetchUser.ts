@@ -1,7 +1,8 @@
+import axios from 'axios'
 import { GithubUser, GithubUserApiResponse } from 'types/githubUser'
 
 // TODO: Update usage of .env variables to support deploying in Vercel
-const GITHUB_USERS_API = 'https://api.github.com/users/'
+export const GITHUB_USERS_API = 'https://api.github.com/users/'
 
 const transformResponse = ({
   avatar_url,
@@ -33,13 +34,9 @@ const transformResponse = ({
 
 export const fetchUser = async (username: string): Promise<GithubUser> => {
   try {
-    const response = await fetch(`${GITHUB_USERS_API}${username}`)
+    const response = await axios.get<GithubUserApiResponse>(`${GITHUB_USERS_API}${username}`)
 
-    if (!response.ok) throw new Error(response.statusText)
-
-    const responseData: GithubUserApiResponse = await response.json()
-
-    return transformResponse(responseData)
+    return transformResponse(response.data)
   } catch (error) {
     console.error(
       `There's a problem fetching fetching GitHub user with username of ${username}.`,
