@@ -139,8 +139,8 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
       </S.UserDetailsAvatarContainer>
       <S.UserDetailsMainDetails>
         <S.UserDetailsNameContainer>
-          <S.UserDetailsName>{name}</S.UserDetailsName>
-          {login && <S.UserDetailsUserName>{`@${login}`}</S.UserDetailsUserName>}
+          <S.UserDetailsName>{name || login}</S.UserDetailsName>
+          <S.UserDetailsUserName>{`@${login}`}</S.UserDetailsUserName>
         </S.UserDetailsNameContainer>
         {created_at && (
           <S.UserDetailsJoinedDate>{`Joined ${formatDate(created_at)}`}</S.UserDetailsJoinedDate>

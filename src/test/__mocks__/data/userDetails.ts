@@ -18,7 +18,7 @@ export const mockedUserDetails: GithubUser = {
 export const mockedEmptyUserDetails: GithubUser = {
   avatar_url: '',
   name: '',
-  login: '',
+  login: 'octocat2',
   created_at: '',
   bio: '',
   public_repos: 0,

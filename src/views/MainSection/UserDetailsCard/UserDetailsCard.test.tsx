@@ -15,14 +15,21 @@ describe('UserDetailsCard', () => {
     expect(avatar).toHaveAttribute('src', mockedUserDetails.avatar_url)
   })
 
-  it(`displays user's name`, () => {
+  it(`displays user's name as a heading text`, () => {
     render(<UserDetailsCard data={mockedUserDetails} />)
 
     const name = screen.getByRole('heading', { name: mockedUserDetails.name })
     expect(name).toBeInTheDocument()
   })
 
-  it(`displays user's username`, () => {
+  it(`displays user's username as a heading text when name is not defined`, () => {
+    render(<UserDetailsCard data={mockedEmptyUserDetails} />)
+
+    const name = screen.getByRole('heading', { name: mockedEmptyUserDetails.login })
+    expect(name).toBeInTheDocument()
+  })
+
+  it(`displays user's username prepended with @`, () => {
     render(<UserDetailsCard data={mockedUserDetails} />)
 
     const username = screen.getByText(`@${mockedUserDetails.login}`)
