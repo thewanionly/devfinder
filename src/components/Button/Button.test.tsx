@@ -35,4 +35,12 @@ describe('Button', () => {
 
     await waitFor(() => expect(onClickHandler).toHaveBeenCalled())
   })
+
+  it('disables the button when `disabled` prop is set to true', () => {
+    render(<Button label="Disabled button" disabled />)
+
+    const button = screen.getByRole('button')
+
+    expect(button).toBeDisabled()
+  })
 })

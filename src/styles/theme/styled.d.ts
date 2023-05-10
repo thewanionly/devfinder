@@ -15,6 +15,7 @@ declare module 'styled-components' {
       searchBarBg: string
       searchBarBoxShadow: string
       searchIcon: string
+      searchLoading: string
       searchError: string
       userDetailsCardBg: string
       userDetailsCardBoxShadow: string

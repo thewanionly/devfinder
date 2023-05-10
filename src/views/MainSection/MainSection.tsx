@@ -1,10 +1,13 @@
+import { useState } from 'react'
+
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 
-import { SearchBar } from './SearchBar'
-import { UserDetailsCard } from './UserDetailsCard'
 import { GithubUser } from 'types/githubUser'
 import { fetchUser } from 'services'
+import { SearchBar } from './SearchBar'
+import { UserDetailsCard } from './UserDetailsCard'
+import { INITIAL_USERNAME } from 'views/App/App.constants'
 
 const S = {
   MainSection: styled.main`
@@ -21,8 +24,10 @@ const S = {
   `,
 }
 
+const NO_SEARCH_RESULTS_TEXT = 'No results'
+
 export const MainSection = () => {
-  const username = 'octocat'
+  const [username, setUsername] = useState(INITIAL_USERNAME)
 
   const { status, data } = useQuery<GithubUser>(
     ['githubUser', username],
@@ -32,9 +37,18 @@ export const MainSection = () => {
     }
   )
 
+  const handleSearch = (searchTerm: string) => {
+    setUsername(searchTerm)
+  }
+
   return (
     <S.MainSection>
-      <SearchBar placeholder="Search GitHub username…" />
+      <SearchBar
+        placeholder="Search GitHub username…"
+        onSearch={handleSearch}
+        errorMessage={status === 'error' ? NO_SEARCH_RESULTS_TEXT : ''}
+        isLoading={status === 'loading'}
+      />
       {status === 'success' && <UserDetailsCard data={data} />}
     </S.MainSection>
   )

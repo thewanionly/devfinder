@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { render, screen, waitFor } from 'test'
+import { render, screen } from 'test'
 
 import { SearchBar } from './SearchBar'
 import { IconName } from 'components'
@@ -33,7 +33,7 @@ describe('SearchBar', () => {
     expect(searchButton).toBeInTheDocument()
   })
 
-  it('displays error text', () => {
+  it('displays passed errorMessage prop', () => {
     const errorText = 'No results'
     render(<SearchBar errorMessage={errorText} />)
 
@@ -41,23 +41,60 @@ describe('SearchBar', () => {
     expect(errorTextEl).toBeInTheDocument()
   })
 
-  it('calls the function passed in the `onSearch` prop when search button is clicked', async () => {
-    const onSearchHandler = jest.fn()
-    render(<SearchBar onSearch={onSearchHandler} />)
+  it('displays Searching… text when isLoading prop is true', () => {
+    render(<SearchBar isLoading />)
 
-    const button = screen.getByRole('button', { name: /search/i })
-    userEvent.click(button)
-
-    await waitFor(() => expect(onSearchHandler).toHaveBeenCalled())
+    const loadingText = screen.getByText(/searching…/i)
+    expect(loadingText).toBeInTheDocument()
   })
 
-  it('calls the function passed in the `onSearch` prop when Enter key is pressed', async () => {
+  it('disables Search button when isLoading prop is true', () => {
+    render(<SearchBar isLoading />)
+
+    const searchButton = screen.getByRole('button', { name: /search/i })
+    expect(searchButton).toBeDisabled()
+  })
+
+  it('calls the function passed in the `onSearch` prop when search button is clicked and searchTerm is not empty', async () => {
     const onSearchHandler = jest.fn()
     render(<SearchBar onSearch={onSearchHandler} />)
 
     const searchInput = screen.getByRole('textbox')
-    userEvent.type(searchInput, 'a{enter}')
+    await userEvent.type(searchInput, 'test')
 
-    await waitFor(() => expect(onSearchHandler).toHaveBeenCalled())
+    const button = screen.getByRole('button', { name: /search/i })
+    await userEvent.click(button)
+
+    expect(onSearchHandler).toHaveBeenCalled()
+  })
+
+  it('calls the function passed in the `onSearch` prop when Enter key is pressed and searchTerm is not empty', async () => {
+    const onSearchHandler = jest.fn()
+    render(<SearchBar onSearch={onSearchHandler} />)
+
+    const searchInput = screen.getByRole('textbox')
+    await userEvent.type(searchInput, 'a{enter}')
+
+    expect(onSearchHandler).toHaveBeenCalled()
+  })
+
+  it('does not call the function passed in the `onSearch` prop when search button is clicked and searchTerm is empty', async () => {
+    const onSearchHandler = jest.fn()
+    render(<SearchBar onSearch={onSearchHandler} />)
+
+    const button = screen.getByRole('button', { name: /search/i })
+    await userEvent.click(button)
+
+    expect(onSearchHandler).not.toHaveBeenCalled()
+  })
+
+  it('does not calls the function passed in the `onSearch` prop when Enter key is pressed and searchTerm is empty', async () => {
+    const onSearchHandler = jest.fn()
+    render(<SearchBar onSearch={onSearchHandler} />)
+
+    const searchInput = screen.getByRole('textbox')
+    await userEvent.type(searchInput, '{enter}')
+
+    expect(onSearchHandler).not.toHaveBeenCalled()
   })
 })

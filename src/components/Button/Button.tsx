@@ -18,6 +18,15 @@ const S = {
       background-color: ${({ theme: { colors } }) => colors.buttonBgHover};
     }
 
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: ${({ theme: { colors } }) => colors.buttonBg};
+      }
+    }
+
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
       line-height: 2.4rem;
@@ -30,6 +39,7 @@ interface CommonProps {
   className?: string
   type?: 'submit' | 'button'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 type ConditionalProps =
@@ -45,11 +55,17 @@ type ConditionalProps =
 type ButtonProps = CommonProps & ConditionalProps
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className = '', type, label, children, onClick },
+  { className = '', type, label, disabled, children, onClick },
   ref
 ) {
   return (
-    <S.Button className={className} ref={ref} type={type || 'button'} onClick={onClick}>
+    <S.Button
+      className={className}
+      ref={ref}
+      type={type || 'button'}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {label || children}
     </S.Button>
   )

@@ -1,7 +1,20 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Button, Icon, IconName } from 'components'
 import React, { useState } from 'react'
+
+const statusText = css`
+  margin-left: 0.8rem;
+  flex-shrink: 0;
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+  line-height: 2.2rem;
+
+  @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+    margin-left: 2rem;
+  }
+`
 
 const S = {
   SearchBar: styled.form`
@@ -47,18 +60,14 @@ const S = {
       margin-left: 2.4rem;
     }
   `,
+  SearchLoadingMessage: styled.span`
+    ${statusText}
+    color: ${({ theme: { colors } }) => colors.searchLoading};
+    opacity: 0.7;
+  `,
   SearchErrorMessage: styled.span`
-    margin-left: 0.8rem;
-    flex-shrink: 0;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
-    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
-    line-height: 2.2rem;
+    ${statusText}
     color: ${({ theme: { colors } }) => colors.searchError};
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
-      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
-      margin-left: 2rem;
-    }
   `,
   SearchButton: styled(Button)`
     margin-left: 0.8rem;
@@ -73,6 +82,7 @@ type SearchBarProps = {
   className?: string
   defaultValue?: string
   placeholder?: string
+  isLoading?: boolean
   errorMessage?: string
   onSearch?: (value: string) => void
 }
@@ -81,6 +91,7 @@ export const SearchBar = ({
   className = '',
   defaultValue = '',
   placeholder = '',
+  isLoading = false,
   errorMessage = '',
   onSearch,
 }: SearchBarProps) => {
@@ -95,15 +106,20 @@ export const SearchBar = ({
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    onSearch?.(searchTerm)
+    if (searchTerm) {
+      onSearch?.(searchTerm)
+    }
   }
 
   return (
     <S.SearchBar className={className} onSubmit={handleSearch}>
       <S.SearchIcon name={IconName.Search} />
       <S.SearchInput placeholder={placeholder} value={searchTerm} onChange={handleSetSearchTerm} />
+      {isLoading && <S.SearchLoadingMessage>Searching…</S.SearchLoadingMessage>}
       {errorMessage && <S.SearchErrorMessage>{errorMessage}</S.SearchErrorMessage>}
-      <S.SearchButton type="submit">Search</S.SearchButton>
+      <S.SearchButton type="submit" disabled={isLoading}>
+        Search
+      </S.SearchButton>
     </S.SearchBar>
   )
 }
