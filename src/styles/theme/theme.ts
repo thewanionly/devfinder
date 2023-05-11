@@ -24,6 +24,9 @@ export const theme = {
       userDetailsHeaderText: COLORS.gunmetal,
       userDetailsUsername: COLORS.deepSkyBlue,
       userDetailsJoinedDate: COLORS.greyishBlue,
+      userDetailsStats: COLORS.zircon,
+      userDetailsStatLabel: COLORS.kashmirBlue,
+      userDetailsStatValue: COLORS.gunmetal,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
@@ -44,6 +47,9 @@ export const theme = {
       userDetailsHeaderText: COLORS.white,
       userDetailsUsername: COLORS.deepSkyBlue,
       userDetailsJoinedDate: COLORS.white,
+      userDetailsStats: COLORS.mirage,
+      userDetailsStatLabel: COLORS.white,
+      userDetailsStatValue: COLORS.white,
     },
   },
   fonts: {

@@ -9,7 +9,7 @@ const S = {
     grid-template-areas:
       'avatar main'
       'bio bio'
-      'numbers numbers'
+      'stats stats'
       'social social';
     grid-template-columns: max-content 1fr;
     column-gap: 1.95rem;
@@ -27,7 +27,7 @@ const S = {
       grid-template-areas:
         'avatar main'
         'avatar bio'
-        'avatar numbers'
+        'avatar stats'
         'avatar social';
       column-gap: 3.7 rem;
     }
@@ -119,6 +119,55 @@ const S = {
       margin-top: 2rem;
     }
   `,
+  UserDetailsStats: styled.dl`
+    grid-area: stats;
+    margin-top: 4.3rem;
+    background-color: ${({ theme: { colors } }) => colors.userDetailsStats};
+    border-radius: 1rem;
+    padding: 1.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      padding: 1.6rem 3.2rem;
+      justify-content: flex-start;
+      gap: 5rem;
+    }
+  `,
+  UserDetailsStatItem: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      align-items: flex-start;
+      flex-basis: 30%;
+    }
+  `,
+  UserDetailsStatLabel: styled.dt`
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
+    line-height: 1.6rem;
+    color: ${({ theme: { colors } }) => colors.userDetailsStatLabel};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
+      line-height: 1.9rem;
+    }
+  `,
+  UserDetailsStatValue: styled.dd`
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    line-height: 2.4rem;
+    color: ${({ theme: { colors } }) => colors.userDetailsStatValue};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.lg};
+      line-height: 3.3rem;
+    }
+  `,
 }
 
 interface UserDetailsBioStyleProps {
@@ -130,7 +179,25 @@ interface UserDetailsCardProps {
 }
 
 export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
-  const { avatar_url, name, login, created_at, bio } = data
+  const { avatar_url, name, login, created_at, bio, public_repos, followers, following } = data
+
+  const statFields = {
+    repos: {
+      label: 'Repos',
+      value: public_repos,
+      testId: 'repos',
+    },
+    followers: {
+      label: 'Followers',
+      value: followers,
+      testId: 'followers',
+    },
+    following: {
+      label: 'Following',
+      value: following,
+      testId: 'following',
+    },
+  }
 
   return (
     <S.UserDetailsCard>
@@ -147,6 +214,14 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
         )}
       </S.UserDetailsMainDetails>
       <S.UserDetailsBio isEmpty={!bio}>{bio || EMPTY_BIO_TEXT}</S.UserDetailsBio>
+      <S.UserDetailsStats>
+        {Object.values(statFields).map(({ label, value, testId }) => (
+          <S.UserDetailsStatItem key={testId}>
+            <S.UserDetailsStatLabel>{label}</S.UserDetailsStatLabel>
+            <S.UserDetailsStatValue data-testid={testId}>{value}</S.UserDetailsStatValue>
+          </S.UserDetailsStatItem>
+        ))}
+      </S.UserDetailsStats>
     </S.UserDetailsCard>
   )
 }

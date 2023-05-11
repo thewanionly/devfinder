@@ -56,4 +56,31 @@ describe('UserDetailsCard', () => {
     const emptyBio = screen.getByText(EMPTY_BIO_TEXT)
     expect(emptyBio).toBeInTheDocument()
   })
+
+  it(`displays user's repos count`, () => {
+    render(<UserDetailsCard data={mockedUserDetails} />)
+
+    const reposLabel = screen.getByText('Repos')
+    const repos = screen.getByTestId('repos')
+    expect(reposLabel).toBeInTheDocument()
+    expect(Number(repos.textContent)).toBe(mockedUserDetails.public_repos)
+  })
+
+  it(`displays user's followers count`, () => {
+    render(<UserDetailsCard data={mockedUserDetails} />)
+
+    const followersLabel = screen.getByText('Followers')
+    const followers = screen.getByTestId('followers')
+    expect(followersLabel).toBeInTheDocument()
+    expect(Number(followers.textContent)).toBe(mockedUserDetails.followers)
+  })
+
+  it(`displays user's following count`, () => {
+    render(<UserDetailsCard data={mockedUserDetails} />)
+
+    const followingLabel = screen.getByText('Following')
+    const following = screen.getByTestId('following')
+    expect(followingLabel).toBeInTheDocument()
+    expect(Number(following.textContent)).toBe(mockedUserDetails.following)
+  })
 })
