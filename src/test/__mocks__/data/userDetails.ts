@@ -18,7 +18,7 @@ export const mockedUserDetails: GithubUser = {
 export const mockedEmptyUserDetails: GithubUser = {
   avatar_url: '',
   name: '',
-  login: 'octocat2',
+  login: 'emptyUser',
   created_at: '',
   bio: '',
   public_repos: 0,
@@ -28,4 +28,25 @@ export const mockedEmptyUserDetails: GithubUser = {
   blog: '',
   twitter_username: '',
   company: '',
+}
+
+export const mockedSearchedUser: GithubUser = {
+  avatar_url: '',
+  name: 'Searched User',
+  login: 'searched_user',
+  created_at: '',
+  bio: '',
+  public_repos: 0,
+  followers: 0,
+  following: 0,
+  location: '',
+  blog: '',
+  twitter_username: '',
+  company: '',
+}
+
+export const mockedUser: Record<string, GithubUser> = {
+  octocat: mockedUserDetails,
+  emptyUser: mockedEmptyUserDetails,
+  searched_user: mockedSearchedUser,
 }

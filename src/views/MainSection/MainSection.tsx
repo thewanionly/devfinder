@@ -7,7 +7,7 @@ import { GithubUser } from 'types/githubUser'
 import { fetchUser } from 'services'
 import { SearchBar } from './SearchBar'
 import { UserDetailsCard } from './UserDetailsCard'
-import { INITIAL_USERNAME } from 'views/App/App.constants'
+import { INITIAL_USERNAME, NO_SEARCH_RESULTS_TEXT } from 'views/App/App.constants'
 
 const S = {
   MainSection: styled.main`
@@ -23,8 +23,6 @@ const S = {
     }
   `,
 }
-
-const NO_SEARCH_RESULTS_TEXT = 'No results'
 
 export const MainSection = () => {
   const [username, setUsername] = useState(INITIAL_USERNAME)
