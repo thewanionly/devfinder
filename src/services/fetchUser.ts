@@ -38,10 +38,13 @@ export const fetchUser = async (username: string): Promise<GithubUser> => {
 
     return transformResponse(response.data)
   } catch (error) {
-    console.error(
-      `There's a problem fetching fetching GitHub user with username of ${username}.`,
-      error
-    )
+    // Don't log error in console when in Jest testing env
+    if (!process.env.JEST_WORKER_ID) {
+      console.error(
+        `There's a problem fetching fetching GitHub user with username of ${username}.`,
+        error
+      )
+    }
     throw error
   }
 }
