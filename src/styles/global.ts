@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
     & * {
       font-family: ${({ theme: { fonts } }) => fonts.primary};
       font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
-      font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+      font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
     }
   }
 `

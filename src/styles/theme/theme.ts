@@ -27,6 +27,7 @@ export const theme = {
       userDetailsStats: COLORS.zircon,
       userDetailsStatLabel: COLORS.kashmirBlue,
       userDetailsStatValue: COLORS.gunmetal,
+      userDetailsSocials: COLORS.kashmirBlue,
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
@@ -50,6 +51,7 @@ export const theme = {
       userDetailsStats: COLORS.mirage,
       userDetailsStatLabel: COLORS.white,
       userDetailsStatValue: COLORS.white,
+      userDetailsSocials: COLORS.white,
     },
   },
   fonts: {

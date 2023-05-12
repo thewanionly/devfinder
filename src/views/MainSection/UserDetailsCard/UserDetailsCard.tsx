@@ -1,7 +1,25 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { GithubUser } from 'types/githubUser'
-import { formatDate } from './UserDetailsCard.utils'
+import {
+  formatDate,
+  formatUsername,
+  getGithubLink,
+  getTwitterLink,
+  getUsername,
+} from './UserDetailsCard.utils'
 import { EMPTY_BIO_TEXT } from './UserDetailsCard.constants'
+import { Icon, IconName } from 'components'
+
+const socialItemText = css`
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
+  line-height: 1.9rem;
+
+  @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+    line-height: 2.2rem;
+  }
+`
 
 const S = {
   UserDetailsCard: styled.article`
@@ -10,10 +28,10 @@ const S = {
       'avatar main'
       'bio bio'
       'stats stats'
-      'social social';
+      'socials socials';
     grid-template-columns: max-content 1fr;
     column-gap: 1.95rem;
-    padding: 3.2rem 2.4rem;
+    padding: 3.2rem 2.4rem 4.8rem;
     background-color: ${({ theme: { colors } }) => colors.userDetailsCardBg};
     box-shadow: 0px 16px 30px -10px ${({ theme: { colors } }) => colors.userDetailsCardBoxShadow};
     border-radius: 1.5rem;
@@ -28,7 +46,7 @@ const S = {
         'avatar main'
         'avatar bio'
         'avatar stats'
-        'avatar social';
+        'avatar socials';
       column-gap: 3.7 rem;
     }
   `,
@@ -168,6 +186,45 @@ const S = {
       line-height: 3.3rem;
     }
   `,
+  UserDetailsSocialsList: styled.ul`
+    grid-area: socials;
+    list-style: none;
+    margin-top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    color: ${({ theme: { colors } }) => colors.userDetailsSocials};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-auto-flow: column;
+      row-gap: 1.5rem;
+      column-gap: 6rem;
+    }
+  `,
+  UserDetailsSocialItem: styled.li`
+    display: flex;
+    align-items: center;
+    gap: 1.925rem;
+  `,
+  UserDetailsSocialIcon: styled(Icon)`
+    width: 2rem;
+  `,
+  UserDetailsSocialText: styled.span`
+    ${socialItemText}
+  `,
+  UserDetailsSocialLink: styled.a`
+    ${socialItemText}
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  `,
 }
 
 interface UserDetailsBioStyleProps {
@@ -179,7 +236,20 @@ interface UserDetailsCardProps {
 }
 
 export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
-  const { avatar_url, name, login, created_at, bio, public_repos, followers, following } = data
+  const {
+    avatar_url,
+    name,
+    login,
+    created_at,
+    bio,
+    public_repos,
+    followers,
+    following,
+    location,
+    blog,
+    twitter_username,
+    company,
+  } = data
 
   const statFields = {
     repos: {
@@ -207,7 +277,7 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
       <S.UserDetailsMainDetails>
         <S.UserDetailsNameContainer>
           <S.UserDetailsName>{name || login}</S.UserDetailsName>
-          <S.UserDetailsUserName>{`@${login}`}</S.UserDetailsUserName>
+          <S.UserDetailsUserName>{formatUsername(login)}</S.UserDetailsUserName>
         </S.UserDetailsNameContainer>
         {created_at && (
           <S.UserDetailsJoinedDate>{`Joined ${formatDate(created_at)}`}</S.UserDetailsJoinedDate>
@@ -222,6 +292,30 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
           </S.UserDetailsStatItem>
         ))}
       </S.UserDetailsStats>
+      <S.UserDetailsSocialsList>
+        <S.UserDetailsSocialItem>
+          <S.UserDetailsSocialIcon name={IconName.Location} />
+          <S.UserDetailsSocialText data-testid="location">{location}</S.UserDetailsSocialText>
+        </S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem>
+          <S.UserDetailsSocialIcon name={IconName.Website} />
+          <S.UserDetailsSocialLink href={blog} target="_blank">
+            {blog}
+          </S.UserDetailsSocialLink>
+        </S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem>
+          <S.UserDetailsSocialIcon name={IconName.Twitter} />
+          <S.UserDetailsSocialLink href={getTwitterLink(twitter_username)} target="_blank">
+            {formatUsername(twitter_username)}
+          </S.UserDetailsSocialLink>
+        </S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem>
+          <S.UserDetailsSocialIcon name={IconName.Company} />
+          <S.UserDetailsSocialLink href={getGithubLink(getUsername(company))} target="_blank">
+            {formatUsername(company)}
+          </S.UserDetailsSocialLink>
+        </S.UserDetailsSocialItem>
+      </S.UserDetailsSocialsList>
     </S.UserDetailsCard>
   )
 }

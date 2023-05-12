@@ -25,6 +25,7 @@ declare module 'styled-components' {
       userDetailsStats: string
       userDetailsStatLabel: string
       userDetailsStatValue: string
+      userDetailsSocials: string
     }
     fonts: {
       primary: string
