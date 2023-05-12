@@ -6,6 +6,7 @@ import {
   getGithubLink,
   getTwitterLink,
   getUsername,
+  getValidWebsiteLink,
 } from './UserDetailsCard.utils'
 import { EMPTY_BIO_TEXT, EMPTY_SOCIALS_TEXT } from './UserDetailsCard.constants'
 import { Icon, IconName } from 'components'
@@ -304,7 +305,7 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
         <S.UserDetailsSocialItem isEmpty={!blog}>
           <S.UserDetailsSocialIcon name={IconName.Website} />
           {blog ? (
-            <S.UserDetailsSocialLink href={blog} target="_blank">
+            <S.UserDetailsSocialLink href={getValidWebsiteLink(blog)} target="_blank">
               {blog}
             </S.UserDetailsSocialLink>
           ) : (

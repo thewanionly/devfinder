@@ -8,6 +8,7 @@ import {
   getGithubLink,
   getTwitterLink,
   getUsername,
+  getValidWebsiteLink,
 } from './UserDetailsCard.utils'
 import { EMPTY_BIO_TEXT, EMPTY_SOCIALS_TEXT } from './UserDetailsCard.constants'
 import { IconName } from 'components'
@@ -106,7 +107,7 @@ describe('UserDetailsCard', () => {
     expect(websiteLink).toBeInTheDocument()
 
     // assert the link href
-    expect(websiteLink).toHaveAttribute('href', mockedUserDetails.blog)
+    expect(websiteLink).toHaveAttribute('href', getValidWebsiteLink(mockedUserDetails.blog))
   })
 
   it(`displays user's twitter link`, () => {

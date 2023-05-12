@@ -7,6 +7,13 @@ export const formatDate = (date: string): string =>
     day: '2-digit',
   }).format(new Date(date))
 
+export const getValidWebsiteLink = (website: string) => {
+  if (!/^https?:\/\//i.test(website)) {
+    return 'https://' + website
+  }
+  return website
+}
+
 export const getTwitterLink = (username: string) => TWIITER_URL + username
 
 export const getGithubLink = (username: string) => GITHUB_URL + username
