@@ -9,7 +9,7 @@ import {
   getTwitterLink,
   getUsername,
 } from './UserDetailsCard.utils'
-import { EMPTY_BIO_TEXT } from './UserDetailsCard.constants'
+import { EMPTY_BIO_TEXT, EMPTY_SOCIALS_TEXT } from './UserDetailsCard.constants'
 import { IconName } from 'components'
 
 describe('UserDetailsCard', () => {
@@ -146,5 +146,25 @@ describe('UserDetailsCard', () => {
       'href',
       getGithubLink(getUsername(mockedUserDetails.company))
     )
+  })
+
+  it(`displays ${EMPTY_SOCIALS_TEXT} if the user has no location data`, () => {
+    render(<UserDetailsCard data={mockedEmptyUserDetails} />)
+
+    const locationValue = screen.getByTestId('location')
+    expect(locationValue.textContent).toBe(EMPTY_SOCIALS_TEXT)
+  })
+
+  it.each`
+    label                 | testId
+    ${'location'}         | ${'location'}
+    ${'website link'}     | ${'website'}
+    ${'twitter username'} | ${'twitter'}
+    ${'company username'} | ${'company'}
+  `(`displays ${EMPTY_SOCIALS_TEXT} if the user has no $label data`, ({ testId }) => {
+    render(<UserDetailsCard data={mockedEmptyUserDetails} />)
+
+    const socialText = screen.getByTestId(testId)
+    expect(socialText.textContent).toBe(EMPTY_SOCIALS_TEXT)
   })
 })

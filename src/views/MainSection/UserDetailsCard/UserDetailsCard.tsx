@@ -7,7 +7,7 @@ import {
   getTwitterLink,
   getUsername,
 } from './UserDetailsCard.utils'
-import { EMPTY_BIO_TEXT } from './UserDetailsCard.constants'
+import { EMPTY_BIO_TEXT, EMPTY_SOCIALS_TEXT } from './UserDetailsCard.constants'
 import { Icon, IconName } from 'components'
 
 const socialItemText = css`
@@ -119,7 +119,7 @@ const S = {
       margin-top: 0.8rem;
     }
   `,
-  UserDetailsBio: styled.p<UserDetailsBioStyleProps>`
+  UserDetailsBio: styled.p<UserDetailsIsEmpty>`
     grid-area: bio;
     margin-top: 3.3rem;
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
@@ -205,10 +205,12 @@ const S = {
       column-gap: 6rem;
     }
   `,
-  UserDetailsSocialItem: styled.li`
+  UserDetailsSocialItem: styled.li<UserDetailsIsEmpty>`
     display: flex;
     align-items: center;
     gap: 1.925rem;
+
+    opacity: ${({ isEmpty }) => (isEmpty ? 0.5 : 1)};
   `,
   UserDetailsSocialIcon: styled(Icon)`
     width: 2rem;
@@ -227,7 +229,7 @@ const S = {
   `,
 }
 
-interface UserDetailsBioStyleProps {
+interface UserDetailsIsEmpty {
   isEmpty: boolean
 }
 
@@ -293,27 +295,47 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
         ))}
       </S.UserDetailsStats>
       <S.UserDetailsSocialsList>
-        <S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem isEmpty={!location}>
           <S.UserDetailsSocialIcon name={IconName.Location} />
-          <S.UserDetailsSocialText data-testid="location">{location}</S.UserDetailsSocialText>
+          <S.UserDetailsSocialText data-testid="location">
+            {location || EMPTY_SOCIALS_TEXT}
+          </S.UserDetailsSocialText>
         </S.UserDetailsSocialItem>
-        <S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem isEmpty={!blog}>
           <S.UserDetailsSocialIcon name={IconName.Website} />
-          <S.UserDetailsSocialLink href={blog} target="_blank">
-            {blog}
-          </S.UserDetailsSocialLink>
+          {blog ? (
+            <S.UserDetailsSocialLink href={blog} target="_blank">
+              {blog}
+            </S.UserDetailsSocialLink>
+          ) : (
+            <S.UserDetailsSocialText data-testid="website">
+              {EMPTY_SOCIALS_TEXT}
+            </S.UserDetailsSocialText>
+          )}
         </S.UserDetailsSocialItem>
-        <S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem isEmpty={!twitter_username}>
           <S.UserDetailsSocialIcon name={IconName.Twitter} />
-          <S.UserDetailsSocialLink href={getTwitterLink(twitter_username)} target="_blank">
-            {formatUsername(twitter_username)}
-          </S.UserDetailsSocialLink>
+          {twitter_username ? (
+            <S.UserDetailsSocialLink href={getTwitterLink(twitter_username)} target="_blank">
+              {formatUsername(twitter_username)}
+            </S.UserDetailsSocialLink>
+          ) : (
+            <S.UserDetailsSocialText data-testid="twitter">
+              {EMPTY_SOCIALS_TEXT}
+            </S.UserDetailsSocialText>
+          )}
         </S.UserDetailsSocialItem>
-        <S.UserDetailsSocialItem>
+        <S.UserDetailsSocialItem isEmpty={!company}>
           <S.UserDetailsSocialIcon name={IconName.Company} />
-          <S.UserDetailsSocialLink href={getGithubLink(getUsername(company))} target="_blank">
-            {formatUsername(company)}
-          </S.UserDetailsSocialLink>
+          {company ? (
+            <S.UserDetailsSocialLink href={getGithubLink(getUsername(company))} target="_blank">
+              {formatUsername(company)}
+            </S.UserDetailsSocialLink>
+          ) : (
+            <S.UserDetailsSocialText data-testid="company">
+              {EMPTY_SOCIALS_TEXT}
+            </S.UserDetailsSocialText>
+          )}
         </S.UserDetailsSocialItem>
       </S.UserDetailsSocialsList>
     </S.UserDetailsCard>
