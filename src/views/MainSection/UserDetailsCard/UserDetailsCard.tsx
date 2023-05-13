@@ -100,11 +100,16 @@ const S = {
       line-height: 3.9rem;
     }
   `,
-  UserDetailsUserName: styled.span`
+  UserDetailsUserName: styled.a`
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
     line-height: 1.9rem;
     color: ${({ theme: { colors } }) => colors.userDetailsUsername};
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       margin-top: 0.2rem;
@@ -295,7 +300,9 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
       <S.UserDetailsMainDetails>
         <S.UserDetailsNameContainer>
           <S.UserDetailsName>{name || login}</S.UserDetailsName>
-          <S.UserDetailsUserName>{formatUsername(login)}</S.UserDetailsUserName>
+          <S.UserDetailsUserName href={getGithubLink(getUsername(login))} target="_blank">
+            {formatUsername(login)}
+          </S.UserDetailsUserName>
         </S.UserDetailsNameContainer>
         {created_at && (
           <S.UserDetailsJoinedDate>{`Joined ${formatDate(created_at)}`}</S.UserDetailsJoinedDate>

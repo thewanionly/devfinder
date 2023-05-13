@@ -40,8 +40,15 @@ describe('UserDetailsCard', () => {
   it(`displays user's username prepended with @`, () => {
     render(<UserDetailsCard data={mockedUserDetails} />)
 
-    const username = screen.getByText(formatUsername(mockedUserDetails.login))
+    const username = screen.getByRole('link', {
+      name: formatUsername(mockedUserDetails.login),
+    })
+
+    // assert the link name
     expect(username).toBeInTheDocument()
+
+    // assert the link href
+    expect(username).toHaveAttribute('href', getGithubLink(getUsername(mockedUserDetails.login)))
   })
 
   it(`displays user's joined date`, () => {
@@ -58,7 +65,7 @@ describe('UserDetailsCard', () => {
     expect(bio).toBeInTheDocument()
   })
 
-  it(`displays ${EMPTY_BIO_TEXT} if the user has no bio`, () => {
+  it(`displays "${EMPTY_BIO_TEXT}" if the user has no bio`, () => {
     render(<UserDetailsCard data={mockedEmptyUserDetails} />)
 
     const emptyBio = screen.getByText(EMPTY_BIO_TEXT)
@@ -149,7 +156,7 @@ describe('UserDetailsCard', () => {
     )
   })
 
-  it(`displays ${EMPTY_SOCIALS_TEXT} if the user has no location data`, () => {
+  it(`displays "${EMPTY_SOCIALS_TEXT}" if the user has no location data`, () => {
     render(<UserDetailsCard data={mockedEmptyUserDetails} />)
 
     const locationValue = screen.getByTestId('location')
@@ -162,7 +169,7 @@ describe('UserDetailsCard', () => {
     ${'website link'}     | ${'website'}
     ${'twitter username'} | ${'twitter'}
     ${'company username'} | ${'company'}
-  `(`displays ${EMPTY_SOCIALS_TEXT} if the user has no $label data`, ({ testId }) => {
+  `(`displays "${EMPTY_SOCIALS_TEXT}" if the user has no $label data`, ({ testId }) => {
     render(<UserDetailsCard data={mockedEmptyUserDetails} />)
 
     const socialText = screen.getByTestId(testId)
