@@ -13,6 +13,14 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      margin-top: 14rem;
+    }
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
+      margin-top: 14.4rem;
+    }
   `,
   HeaderTitle: styled.h1`
     font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
