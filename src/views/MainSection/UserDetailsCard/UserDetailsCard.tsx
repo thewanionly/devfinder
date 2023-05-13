@@ -82,7 +82,13 @@ const S = {
       justify-content: space-between;
     }
   `,
-  UserDetailsNameContainer: styled.div``,
+  UserDetailsNameContainer: styled.div`
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  `,
   UserDetailsName: styled.h2`
     font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
@@ -121,6 +127,7 @@ const S = {
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
       margin-top: 0.8rem;
+      text-align: right;
     }
   `,
   UserDetailsBio: styled.p<UserDetailsIsEmpty>`
