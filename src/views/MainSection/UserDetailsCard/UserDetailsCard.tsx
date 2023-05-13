@@ -15,6 +15,9 @@ const socialItemText = css`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
   font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
   line-height: 1.9rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
@@ -209,12 +212,17 @@ const S = {
   UserDetailsSocialItem: styled.li<UserDetailsIsEmpty>`
     display: flex;
     align-items: center;
-    gap: 1.925rem;
-
+    gap: 1.3rem;
     opacity: ${({ isEmpty }) => (isEmpty ? 0.5 : 1)};
+    min-width: 50%;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      gap: 1.6rem;
+    }
   `,
   UserDetailsSocialIcon: styled(Icon)`
     width: 2rem;
+    flex-shrink: 0;
   `,
   UserDetailsSocialText: styled.span`
     ${socialItemText}
