@@ -114,7 +114,7 @@ export const SearchBar = ({
       <S.SearchIcon name={IconName.Search} />
       <S.SearchInput placeholder={placeholder} value={searchTerm} onChange={handleSetSearchTerm} />
       {errorMessage && <S.SearchErrorMessage>{errorMessage}</S.SearchErrorMessage>}
-      <S.SearchButton type="submit" disabled={isLoading}>
+      <S.SearchButton type="submit" isLoading={isLoading}>
         {!isLoading ? 'Search' : <LoadingDots role="status" label="searching user" />}
       </S.SearchButton>
     </S.SearchBar>

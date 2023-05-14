@@ -2,8 +2,8 @@ import { forwardRef } from 'react'
 import styled from 'styled-components'
 
 const S = {
-  Button: styled.button`
-    cursor: pointer;
+  Button: styled.button<ButtonStyleProps>`
+    cursor: ${({ isLoading }) => (!isLoading ? 'pointer' : 'wait')};
     border: none;
     border-radius: 1rem;
     padding: 1.25rem 1.6rem;
@@ -35,11 +35,16 @@ const S = {
   `,
 }
 
+type ButtonStyleProps = {
+  isLoading: boolean
+}
+
 interface CommonProps {
   className?: string
   type?: 'submit' | 'button'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
+  isLoading?: boolean
 }
 
 type ConditionalProps =
@@ -55,7 +60,7 @@ type ConditionalProps =
 type ButtonProps = CommonProps & ConditionalProps
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className = '', type, label, disabled, children, onClick },
+  { className = '', type, label, disabled, isLoading = false, children, onClick },
   ref
 ) {
   return (
@@ -65,6 +70,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type || 'button'}
       onClick={onClick}
       disabled={disabled}
+      isLoading={isLoading}
     >
       {label || children}
     </S.Button>
