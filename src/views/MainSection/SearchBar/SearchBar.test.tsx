@@ -41,11 +41,11 @@ describe('SearchBar', () => {
     expect(errorTextEl).toBeInTheDocument()
   })
 
-  it('displays Searching… text when isLoading prop is true', () => {
+  it('displays loading dots animation in search button when isLoading prop is true', () => {
     render(<SearchBar isLoading />)
 
-    const loadingText = screen.getByText(/searching…/i)
-    expect(loadingText).toBeInTheDocument()
+    const loadingDots = screen.getByRole('status', { name: 'searching user' })
+    expect(loadingDots).toBeInTheDocument()
   })
 
   it('disables Search button when isLoading prop is true', () => {

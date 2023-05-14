@@ -12,10 +12,10 @@ declare module 'styled-components' {
       buttonBg: string
       buttonBgHover: string
       buttonText: string
+      loadingDot: string
       searchBarBg: string
       searchBarBoxShadow: string
       searchIcon: string
-      searchLoading: string
       searchError: string
       userDetailsCardBg: string
       userDetailsCardBoxShadow: string

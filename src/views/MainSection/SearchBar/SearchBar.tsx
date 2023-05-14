@@ -1,20 +1,8 @@
-import styled, { css } from 'styled-components'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import { Button, Icon, IconName } from 'components'
-import React, { useState } from 'react'
-
-const statusText = css`
-  margin-left: 0.8rem;
-  flex-shrink: 0;
-  font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
-  font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
-  line-height: 2.2rem;
-
-  @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
-    margin-left: 2rem;
-  }
-`
+import { LoadingDots } from './LoadingDots'
 
 const S = {
   SearchBar: styled.form`
@@ -60,20 +48,29 @@ const S = {
       margin-left: 2.4rem;
     }
   `,
-  SearchLoadingMessage: styled.span`
-    ${statusText}
-    color: ${({ theme: { colors } }) => colors.searchLoading};
-    opacity: 0.7;
-  `,
   SearchErrorMessage: styled.span`
-    ${statusText}
+    margin-left: 0.8rem;
+    flex-shrink: 0;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    line-height: 2.2rem;
     color: ${({ theme: { colors } }) => colors.searchError};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+      margin-left: 2rem;
+    }
   `,
   SearchButton: styled(Button)`
+    flex-shrink: 0;
     margin-left: 0.8rem;
+    width: 8.4rem;
+    height: 4.6rem;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       margin-left: 2.4rem;
+      width: 10.6rem;
+      height: 5rem;
     }
   `,
 }
@@ -115,10 +112,9 @@ export const SearchBar = ({
     <S.SearchBar className={className} onSubmit={handleSearch}>
       <S.SearchIcon name={IconName.Search} />
       <S.SearchInput placeholder={placeholder} value={searchTerm} onChange={handleSetSearchTerm} />
-      {isLoading && <S.SearchLoadingMessage>Searching…</S.SearchLoadingMessage>}
       {errorMessage && <S.SearchErrorMessage>{errorMessage}</S.SearchErrorMessage>}
       <S.SearchButton type="submit" disabled={isLoading}>
-        Search
+        {!isLoading ? 'Search' : <LoadingDots role="status" label="searching user" />}
       </S.SearchButton>
     </S.SearchBar>
   )

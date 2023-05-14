@@ -56,10 +56,10 @@ describe('App', () => {
     expect(userCardHeadingText).toBeInTheDocument()
   })
 
-  it(`displays loading message in the searchbar after user inputs a username and clicks the search button`, async () => {
+  it(`displays loading dots animation in the search button after user inputs a username and clicks the search button`, async () => {
     render(<App />)
 
-    expect(screen.queryByText(/searching…/i)).not.toBeInTheDocument()
+    expect(screen.queryByRole('status', { name: 'searching user' })).not.toBeInTheDocument()
 
     const searchInput = screen.getByRole('textbox')
     await userEvent.type(searchInput, 'test')
@@ -67,10 +67,10 @@ describe('App', () => {
     const button = screen.getByRole('button', { name: /search/i })
     await userEvent.click(button)
 
-    const loadingText = await screen.findByText(/searching…/i)
+    const loadingDots = screen.getByRole('status', { name: 'searching user' })
 
-    expect(loadingText).toBeInTheDocument()
-    await waitForElementToBeRemoved(loadingText)
+    expect(loadingDots).toBeInTheDocument()
+    await waitForElementToBeRemoved(loadingDots)
   })
 
   it(`displays an error message in the searchbar after clicking search button when inputted username is not found `, async () => {
