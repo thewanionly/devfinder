@@ -34,12 +34,13 @@ const S = {
     border: 0;
     outline: none;
     background-color: transparent;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.regular};
     line-height: 2.5rem;
     color: ${({ theme: { colors } }) => colors.bodyText};
 
     &::placeholder {
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
       color: ${({ theme: { colors } }) => colors.bodyText};
     }
 
