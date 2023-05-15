@@ -5,9 +5,9 @@ import styled from 'styled-components'
 
 import { GithubUser } from 'types/githubUser'
 import { fetchUser } from 'services'
+import { INITIAL_USERNAME, NO_SEARCH_RESULTS_TEXT } from 'views/App/App.constants'
 import { SearchBar } from './SearchBar'
 import { UserDetailsCard } from './UserDetailsCard'
-import { INITIAL_USERNAME, NO_SEARCH_RESULTS_TEXT } from 'views/App/App.constants'
 
 const S = {
   MainSection: styled.main`
@@ -47,6 +47,7 @@ export const MainSection = () => {
         errorMessage={status === 'error' ? NO_SEARCH_RESULTS_TEXT : ''}
         isLoading={status === 'loading'}
       />
+      {status === 'loading' && <UserDetailsCard.Skeleton />}
       {status === 'success' && <UserDetailsCard data={data} />}
     </S.MainSection>
   )
