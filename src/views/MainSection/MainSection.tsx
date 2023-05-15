@@ -47,8 +47,9 @@ export const MainSection = () => {
         errorMessage={status === 'error' ? NO_SEARCH_RESULTS_TEXT : ''}
         isLoading={status === 'loading'}
       />
-      {status === 'loading' && <UserDetailsCard.Skeleton />}
+      {status === 'loading' && <UserDetailsCard.Loading />}
       {status === 'success' && <UserDetailsCard data={data} />}
+      {status === 'error' && <UserDetailsCard.Error />}
     </S.MainSection>
   )
 }

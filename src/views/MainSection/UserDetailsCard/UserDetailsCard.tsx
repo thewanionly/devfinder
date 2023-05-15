@@ -1,4 +1,6 @@
 import { GithubUser } from 'types/githubUser'
+import { IconName } from 'components'
+
 import {
   formatDate,
   formatUsername,
@@ -8,9 +10,9 @@ import {
   getValidWebsiteLink,
 } from './UserDetailsCard.utils'
 import { EMPTY_BIO_TEXT, EMPTY_SOCIALS_TEXT } from './UserDetailsCard.constants'
-import { IconName } from 'components'
-import { UserDetailsCardSkeleton } from './UserDetailsCardSkeleton'
 import { UserDetailCardStyles as S } from './UserDetailsCard.styles'
+import { UserDetailsCardSkeleton } from './UserDetailsCardSkeleton'
+import { UserDetailsCardNotFound } from './UserDetailsCardNotFound'
 
 export interface UserDetailsIsEmpty {
   isEmpty?: boolean
@@ -127,4 +129,5 @@ export const UserDetailsCard = ({ data }: UserDetailsCardProps) => {
   )
 }
 
-UserDetailsCard.Skeleton = UserDetailsCardSkeleton
+UserDetailsCard.Loading = UserDetailsCardSkeleton
+UserDetailsCard.Error = UserDetailsCardNotFound
