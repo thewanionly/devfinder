@@ -20,7 +20,7 @@ const S = {
 
     &:disabled {
       opacity: 0.7;
-      cursor: not-allowed;
+      cursor: ${({ isLoading }) => (!isLoading ? 'not-allowed' : 'wait')};
 
       &:hover {
         background-color: ${({ theme: { colors } }) => colors.buttonBg};
@@ -69,7 +69,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       type={type || 'button'}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       isLoading={isLoading}
     >
       {label || children}
