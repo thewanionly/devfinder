@@ -32,7 +32,7 @@ export const theme = {
     },
     [AppTheme.Dark]: {
       appBg: COLORS.mirage,
-      appHeaderText: COLORS.white,
+      appHeaderText: 'red',
       appThemeToggle: COLORS.white,
       appThemeToggleHover: COLORS.blueBell,
       bodyText: COLORS.white,
