@@ -1,19 +1,17 @@
-# Vite-React-TSJR
+# devfinder
 
-Vite-React-TSJR is a starter template for a Vite + React + TSJR (TypeScript, styled-components, Jest, React Testing Library) project.
+A web app that let's you search for a GitHub user and display user profile data. This app uses the GitHub users API.
 
 ## Technologies used
 
 1. Vite
 2. React
 3. TypeScript
-4. styled-components
-5. Jest
-6. React Testing Library
-
-## How to Use
-
-TODO:
+4. React Query
+5. styled-components
+6. Framer motion
+7. Jest
+8. React Testing Library
 
 ## Running the app
 
@@ -58,6 +56,8 @@ All source codes live in the `src` folder. Here's how I structured the different
   - Breakdown global states to seprate contexts depending on their function. Global contexts are stored here
 - `hooks`
   - Reusable hooks that is used across the app.
+- `services`
+  - Functions that are involed in interfacing with external API are stored here.
 - `styles`
   - Global styles and theme are stored here.
 - `test`
@@ -66,8 +66,6 @@ All source codes live in the `src` folder. Here's how I structured the different
   - Types that are shared across components are stored here.
 - `views`
   - This can also be called "pages" (or could be a separate folder as well). The main entry point or container component for each of your view or page lives here. The `App.tsx` file also lives here.
-
-Helpful links to follow as guide: TODO:
 
 ## Contributing
 
