@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { GithubUser, GithubUserApiResponse } from 'types/githubUser'
 
+export const GITHUB_USERS_API = 'https://api.github.com/users/'
+
 const transformResponse = ({
   avatar_url,
   name,
@@ -31,9 +33,7 @@ const transformResponse = ({
 
 export const fetchUser = async (username: string): Promise<GithubUser> => {
   try {
-    const response = await axios.get<GithubUserApiResponse>(
-      `${import.meta.env.VITE_GITHUB_USERS_API}${username}`
-    )
+    const response = await axios.get<GithubUserApiResponse>(`${GITHUB_USERS_API}${username}`)
 
     return transformResponse(response.data)
   } catch (error) {
