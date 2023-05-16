@@ -187,7 +187,7 @@ export const UserDetailsCardSkeleton = () => {
       </S.UserDetailsStats>
       <S.UserDetailsSocialsList>
         {socialItems.map((icon) => (
-          <S.UserDetailsSocialItem>
+          <S.UserDetailsSocialItem key={icon}>
             <S.UserDetailsSocialIcon name={icon} />
             <S.UserDetailsSocialText {...SkeletonProps} />
           </S.UserDetailsSocialItem>
